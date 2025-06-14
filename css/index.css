@@ -1,0 +1,163 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+/* Body Styling */
+body {
+  background-color: rgb(227, 210, 197);
+  margin-left: 5%;
+}
+
+/* Container Styling */
+.container {
+  width: 30%;
+  background: #85847b;
+  padding: 30px;
+  text-align: center;
+  color: white;
+  padding-top: 15%;
+}
+
+/* Input Fields */
+input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+}
+input:focus {
+  background-color: beige !important;
+  outline: none;
+  box-shadow: 0 0 5px rgba(255, 87, 51, 0.5);
+}
+
+/* Login Button */
+button {
+  width: 100%;
+  background: #ffffff;
+  color: #4a0f0f;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+p {
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+#LoginBox {
+  display: flex;
+  justify-content: space-between;
+  height: 100vh;
+  gap: 20px;
+  padding: 20px;
+}
+
+/* Left Image Section */
+#LoginBox > div:nth-child(1) {
+  width: 60%;
+  padding-top: 10%;
+}
+
+#LoginBox > div > img {
+  height: 90%;
+  width: 100%;
+  object-fit: cover;
+  border-top-left-radius: 20%;
+  border-top-right-radius: 20%;
+}
+
+/* Heading and Logo */
+h1 {
+  font-family: "Dancing Script", cursive;
+  font-size: 26px;
+  text-align: center;
+  color: rgb(137, 90, 4);
+}
+
+span {
+  display: flex;
+  justify-content: center;
+  margin-top: -75px;
+  margin-bottom: 30px;
+  align-items: center;
+}
+
+#logo {
+  width: 50px;
+  border-radius: 50%;
+  margin-right: 20px;
+}
+
+a {
+  color: rgb(141, 230, 230);
+}
+
+/* Responsive Design */
+@media screen and (max-width: 1024px) {
+  .container {
+    width: 45%;
+    padding-top: 10%;
+  }
+
+  #LoginBox > div:nth-child(1) {
+    width: 50%;
+    padding-top: 5%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  body {
+    padding-top:40px;
+    margin-left: 0;
+  }
+
+  #LoginBox {
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    gap: 40px;
+  }
+
+  #LoginBox > div:nth-child(1),
+  .container {
+    width: 90%;
+    padding-top: 0;
+  }
+
+  #LoginBox > div > img {
+    height: auto;
+    border-radius: 20px;
+  }
+
+  span {
+    margin-top: -40px;
+    margin-bottom: 20px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  h1 {
+
+    font-size: 22px;
+  }
+
+  .container {
+    padding: 20px;
+  }
+
+  input,
+  button {
+    font-size: 14px;
+    padding: 10px;
+  }
+}

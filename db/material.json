@@ -1,0 +1,9 @@
+{
+  "MaterialRates": {
+    "Tiles": { "unit": "per_sqft", "rate": 50 },
+    "Cement": { "unit": "per_bag", "rate": 350, "coverage": 50 },
+    "Bricks": { "unit": "per_brick", "rate": 7, "coverage": 1 },
+    "Labour": { "unit": "per_sqft", "rate": 100 },
+    "Concrete": { "unit": "per_sqm", "rate": 600 }
+  }
+}

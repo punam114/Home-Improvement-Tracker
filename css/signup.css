@@ -1,0 +1,86 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+/* Body Styling */
+body {
+  background-color: rgb(227, 210, 197);
+  background-image: url();
+  margin-left: 5%;
+}
+
+
+/* Container Styling */
+.container {
+  width:30%;
+  
+  background: #85847b;
+  padding: 30px;
+  text-align: center;
+  height:60vh;
+  color: white;
+  margin: auto;
+  box-shadow: rgba(247, 244, 244, 0.904) 0px 4px 12px;
+}
+
+/* Input Fields */
+input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+/* Login Button */
+button {
+  width: 100%;
+  background: #ffffff;
+  color: #4a0f0f;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+/* Error and Success P tag */
+p {
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+/* Mobile Responsive */
+@media (max-width: 480px) {
+  .container {
+    width: 90%;
+    padding: 20px;
+  }
+}
+span{
+  display: flex;
+  /* border: 2px solid; */
+  justify-content: center;
+  margin-top: 8%;
+  margin-bottom: 20px;
+  align-items: center;
+}
+#logo{
+        /* border: 2px solid; */
+        width: 50px;
+       border-radius: 50%;
+       margin-right: 20px;
+    }
+    a{
+      color: rgb(141, 230, 230);
+    }
+    h1{
+  font-family: "Dancing Script", cursive;
+  font-size: 26px;
+  text-align: center;
+  color: rgb(137, 90, 4);
+}

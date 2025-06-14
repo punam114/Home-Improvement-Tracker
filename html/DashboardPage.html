@@ -1,0 +1,90 @@
+<!-- @format -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="./logo 1.png"> 
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/dashboard.css" />
+    <title>Home Improvement Tracker</title>
+  </head>
+  <body>
+    <div id="nav">
+  <div id="logo">
+    <img
+      src="https://i.ibb.co/whDfFM3K/vecteezy-four-rectangle-with-tools-building-11574343.jpg"
+      alt="logo"
+    />
+  </div>
+
+  <h1 id="navH1">Home Improvement Tracker</h1>
+
+  <div id="navText">
+    <a href="Home.html"><h3>Home</h3></a>
+    <a href="DashboardPage.html"><h3>Dashboard</h3></a>
+    <a href="Contractor.html"><h3>Contractors</h3></a>
+  </div>
+
+  <div id="logout">
+    <button id="logout-btn">Log Out</button>
+  </div>
+</div>
+
+
+    <!-- form -->
+    <button id="newProjectBtn">➕Create New Project</button>
+
+    <!-- Hidden form -->
+  
+    <div id="form-div" style="display: none; margin-top: 10px">
+      <button id="closeBtn">❌</button>
+      <input type="url" id="ref-image" placeholder="Reference Image URL" />
+      <select id="category">
+        <option value="">Select Category</option>
+        <option value="Kitchen">Kitchen</option>
+        <option value="Hall">Hall</option>
+        <option value="Bedroom">Bedroom</option>
+        <option value="Bathroom">Bathroom</option>
+      </select>
+      <br>
+      <label for="">Description:</label>
+      <br>
+      <textarea name="" id="description"></textarea>
+      <button id="submit-btn">Submit</button>
+    </div>
+
+    <!-- project card -->
+    <div id="displayResult"></div>
+
+ <!-- footer -->
+    <footer>
+      <div>
+        <p>
+          <strong>Home Improvement Tracker</strong> © 2025 | Built with 💻 using
+          Firebase & JavaScript
+        </p>
+
+        <p>
+          <a href="about.html">About</a> | <a href="contact.html">Contact</a> |
+          <a href="privacy.html">Privacy Policy</a> |
+          <a href="terms.html">Terms of Service</a>
+        </p>
+
+        <p>
+          Follow us on: <a href="#" target="_blank">Instagram</a> •
+          <a href="#" target="_blank">YouTube</a> •
+          <a href="#" target="_blank">GitHub</a>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
+<script type="module" src="../js/auth.js"></script>
+<script src="../js/dashboardPage.js"></script>

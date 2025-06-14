@@ -1,0 +1,112 @@
+<!-- @format -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="./logo 1.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/home.css" />
+    <title>Home Improvement Tracker</title>
+  </head>
+  <body>
+   <div id="nav">
+  <div id="logo">
+    <img
+      src="https://i.ibb.co/whDfFM3K/vecteezy-four-rectangle-with-tools-building-11574343.jpg"
+      alt="logo"
+    />
+  </div>
+
+  <h1 id="navH1">Home Improvement Tracker</h1>
+
+  <div id="navText">
+    <a href="Home.html"><h3>Home</h3></a>
+    <a href="DashboardPage.html"><h3>Dashboard</h3></a>
+    <a href="Contractor.html"><h3>Contractors</h3></a>
+  </div>
+
+  <div id="logout">
+    <button id="logout-btn">Log Out</button>
+  </div>
+</div>
+
+    <!-- first part -->
+
+    <div id="box1">
+      <div>
+        <h2>Manage your renovation projects with ease</h2>
+        <h3>
+          A home improvement tracker is a tool that helps homeowners plan,
+          budget, and manage their home renovation or improvement projects. It
+          can be used to track expenses, timelines, and progress, ensuring
+          projects stay on track and within budget.
+        </h3>
+        <button class="searchBtn" onclick="goToPage()">Start New Project</button>
+      </div>
+      <div>
+        <img
+          src="https://images.unsplash.com/photo-1533779283484-8ad4940aa3a8?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          alt=""
+        />
+      </div>
+    </div>
+
+    <!-- second part -->
+    <div id="box2">
+      <h1>Design Inspiration</h1>
+    </div>
+
+    <div id="function">
+      <!-- search -->
+      <input type="text" id="searchArea" placeholder="Search House Area" />
+      <button id="searchBtn">Search</button>
+
+      <!-- sort -->
+      <select name="" id="budget">
+        <option value="High to Low">High to Low</option>
+        <option value="Low to High">Low to High</option>
+      </select>
+
+      <!-- filter -->
+      <select name="" id="areas">
+        <option value="hall">Hall</option>
+        <option value="bedroom">Bedroom</option>
+        <option value="bathroom">Bathroom</option>
+        <option value="kitchen">Kitchen</option>
+      </select>
+    </div>
+
+    <div id="designBox"></div>
+
+    <!-- footer -->
+    <footer>
+      <div>
+        <p>
+          <strong>Home Improvement Tracker</strong> © 2025 | Built with 💻 using
+          Firebase & JavaScript
+        </p>
+
+        <p>
+          <a href="about.html">About</a> | <a href="contact.html">Contact</a> |
+          <a href="privacy.html">Privacy Policy</a> |
+          <a href="terms.html">Terms of Service</a>
+        </p>
+
+        <p>
+          Follow us on: <a href="#" target="_blank">Instagram</a> •
+          <a href="#" target="_blank">YouTube</a> •
+          <a href="#" target="_blank">GitHub</a>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
+<script src="../js/home.js"></script>
+<script type="module" src="../js/auth.js"></script>

@@ -1,0 +1,252 @@
+/* Navbar Container */
+#nav {
+  background-color: #a9714b;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 16px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* Logo */
+#logo img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+/* Title */
+#nav h1 {
+  font-family: 'Dancing Script', cursive;
+  color: #fef6e4;
+  font-size: 24px;
+  margin: 0 20px;
+  flex-grow: 1;
+  text-align: center;
+}
+
+/* Navigation Links */
+#navText {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+#navText > a {
+  text-decoration: none;
+  color: #fef6e4;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+#navText > a:hover {
+  color: #e7c6a0;
+}
+
+h3 {
+  font-family: "Dancing Script", cursive;
+  font-size: 22px;
+  margin: 0;
+}
+
+/* Logout Button */
+#logout-btn {
+  background-color: #fff;
+  color: #a9714b;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#logout-btn:hover {
+  background-color: #e7c6a0;
+}
+
+/* Responsive Navbar */
+@media screen and (max-width: 768px) {
+  #nav {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  #nav h1 {
+    margin: 10px 0;
+  }
+
+  #navText {
+    justify-content: center;
+    margin: 10px 0;
+  }
+
+  #logout-btn {
+    margin-top: 10px;
+  }
+}
+
+
+body{
+  padding: 0;;
+  margin: 0;
+}
+/* Hidden form */
+
+#form-div{
+    background-color: rgb(251, 250, 248);
+    /* border: 2px solid; */
+    margin: auto;
+    box-shadow: rgba(8, 7, 7, 0.2) 0px 2px 8px 0px;
+    border-radius: 12px;
+    width: 200px;
+    padding:10px;
+    width: 300px;
+
+}
+#form-div>input,select,button,textarea{
+    padding: 10px;
+    margin: 10px;
+    margin-left: 50px;
+}
+
+label{
+    font-size: 14px;
+    margin-left: 18%;
+}
+#displayResult {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    margin: 40px;
+    gap: 20px;
+}
+
+#displayResult>div{
+box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+padding: 20px;
+
+}
+#displayResult img{
+    width: 100%;
+}
+#submit-btn{
+    background-color: rgb(96, 56, 6);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 22px;
+}
+textarea{
+    max-width:200px;
+    box-sizing: border-box;
+}
+#closeBtn{
+    background-color: white;
+    border: none;
+    margin-top: -20px;
+    margin-left:90%;
+    padding: 0;
+}
+#detailBtn{
+    background-color:rgb(108, 27, 27) ;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius:4px;
+}
+#detailBtn:hover{
+   background-color:rgba(108, 27, 27, 0.68) ;
+
+}
+#deleteBtn{
+    border: none;
+    padding: 12px 20px;
+     border-radius:4px;
+}
+#deleteBtn:hover{
+    background-color: red;
+    color: white;
+}
+footer{
+  background-color: #602d0b;
+  color: white;
+  text-align: center;
+  padding: 6px;
+}
+footer a{
+  color: #e7c6a0;
+}
+/* ✅ Responsive Design */
+@media screen and (max-width: 768px) {
+  /* Navbar becomes vertical and neat */
+  #nav {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 12px;
+  }
+
+  #nav img {
+    width: 50px;
+    height: 50px;
+  }
+
+  #navText {
+    margin-left: 0;
+    text-align: center;
+  }
+
+  #navText > a {
+    display: inline-block;
+    margin: 6px 10px;
+    font-size: 16px;
+  }
+
+  #logout-btn {
+    width: 100%;
+    max-width: 200px;
+    text-align: center;
+    margin: 10px auto;
+  }
+
+  /* Form responsiveness */
+  #form-div {
+    width: 90%;
+    padding: 20px;
+  }
+
+  #form-div > input,
+  #form-div > select,
+  #form-div > button,
+  #form-div > textarea {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  label {
+    margin-left: 0;
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  /* Cards become single column */
+  #displayResult {
+    grid-template-columns: 1fr;
+    margin: 20px;
+    gap: 20px;
+  }
+
+  /* Buttons full-width on mobile */
+  #detailBtn,
+  #deleteBtn {
+    width:80%;
+    margin-top: 10px;
+  }
+
+  footer {
+    font-size: 14px;
+    padding: 10px;
+  }
+}
