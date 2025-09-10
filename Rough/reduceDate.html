@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p id="countdownText"></p>
+</body>
+</html>
+<script>
+  document.getElementById("countdownText").innerText = getRemainingDays("2025-07-26");
+  function getRemainingDays(endDateStr) {
+  let today = new Date(); // current date
+  let endDate = new Date(endDateStr); // your end date
+  
+  // Clear time part for accurate day difference
+  today.setHours(0, 0, 0, 0);
+  endDate.setHours(0, 0, 0, 0);
+
+  let timeDiff = endDate - today;
+
+  let remainingDays = Math.ceil(timeDiff / (1000 * 60 * 60 * 24)); // ms to days
+
+  if (remainingDays > 0) {
+    return `${remainingDays} day(s) left`;
+  } else if (remainingDays === 0) {
+    return `Last Day Today`;
+  } else {
+    return `Project Ended ${Math.abs(remainingDays)} day(s) ago`;
+  }
+}
+
+// Example usage:
+let result = getRemainingDays("2025-07-26");
+console.log(result); // shows how many days left from today
+
+</script>

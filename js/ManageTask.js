@@ -3,143 +3,199 @@
 const params = new URLSearchParams(window.location.search);
 const id = params.get("id");
 
-let url = "https://home-improvement-tracker-fb992-default-rtdb.firebaseio.com/Projects";
+let url ="https://home-improvement-tracker-fb992-default-rtdb.firebaseio.com/Projects";
 
+////////////////////////////////////////////////////////////////////
+
+//display images
+let inputs = document.querySelectorAll(".image-input");
+
+inputs.forEach((input, index) => {
+  input.addEventListener("change", async function () {
+    let file = this.files[0];
+
+    if (file) {
+      let reader = new FileReader();
+
+      reader.addEventListener("load", () => {
+        // Find the corresponding preview image in the same container
+        const preview = this.parentElement.querySelector(".preview");
+        preview.src = reader.result;
+        preview.style.display = "block";
+      });
+      reader.readAsDataURL(file);
+    }
+    //set it to firebase
+
+    
+
+  });
+});
+//display images
+
+////////////////////////////////////////////////////////////////////
 
 //fetch data which is taken from previous page
+let Idcategory, Idbudget, IddateTime, Iddescription, IdendDate, Idimage;
+
 async function showDetail() {
   if (id) {
     let res = await fetch(`${url}/${id}.json`);
     let data = await res.json();
+    // console.log(data);
+    if (data && data.budget) {
+      Idcategory = data.category;
+      Idbudget = data.budget;
+      projectBudget = Idbudget;
+      IddateTime = data.dateTime;
+      Iddescription = data.description;
+      IdendDate = data.endDate;
+    }
+    console.log(data)
     displayData(data);
-    displayTasks(data.tasks || []);
-    
-} else {
+    showBudgetTable(Idbudget); // call budget table (it will now handle the final budget display)
+  } else {
     alert("ID not found!");
+  }
 }
-}
+////////////////////////////////////////////////////////////////////
 
-function displayData(DetailData) {
+//display category after image
+function displayData(Data) {
   let DetailPage = document.getElementById("DetailPage");
   DetailPage.innerHTML = "";
 
   // card design
   let card = document.createElement("div");
   card.innerHTML = `
-    <img src="${DetailData.image}" width="400px" />
-    <h4>${DetailData.category} Design</h4>
+    <h4>${Data.category} Design</h4>
   `;
   DetailPage.appendChild(card);
 }
+//display category after image
 
-//display all tasks
-function displayTasks(tasks) {
-  let taskTable = document.getElementById("taskTable");
-  taskTable.innerHTML = "";
 
-  if (tasks.length === 0) {
-    taskTable.innerHTML = "<p>No tasks added yet.</p>";
+////////////////////////////////////////////////////////////////////
+
+// working on task page
+
+let addTask = document.getElementById("addTask");
+let addDes = document.getElementById("addDes");
+let addBtn = document.getElementById("addBtn");
+
+let taskData = [];
+
+addBtn.addEventListener("click", async () => {
+  let addTaskVal = addTask.value;
+  let addDesVal = addDes.value;
+  if (!addTaskVal || !addDesVal) {
+    alert("Add Task and Description Both");
     return;
   }
 
-  //calculate completion percentage
-  let completedCount = tasks.filter((task) => task.status === "Done").length;
-  let totalCount = tasks.length;
-  let percentage = Math.round((completedCount / totalCount) * 100);
+  //save to firebase
+  let allTasks = {
+    taskNo: taskData.length + 1, // subtract 1 because we already incremented
+    task: addTaskVal,
+    description: addDesVal,
+    status: "pending",
+  };
 
-
-  let displayStatus = document.createElement("div");
-  displayStatus.id ="displayStatus"
-  displayStatus.style.marginBottom = "10px";
-  displayStatus.innerHTML = `<strong>Project Completion: ${percentage}%</strong>`;
-if(`${percentage}` == 100){
-    alert("100% task completed");
-    
-}
-
-  taskTable.appendChild(displayStatus);
-
-  //task table
-  let table = document.createElement("table");
-  table.innerHTML = `
-    <thead>
-      <tr>
-        <th>Task No.</th>
-        <th>Task</th>
-        <th>Status</th>
-        <th>Mark as Done</th>
-      </tr>
-    </thead>
-    <tbody>
-      ${tasks
-        .map(
-          (task, index) => `
-        <tr>
-          <td>Task ${index + 1}</td>
-          <td>${task.title}</td>
-          <td class="status-text">${
-            task.status === "Done" ? "Completed" : "Pending"
-          }</td>
-          <td><input type="checkbox" data-index="${index}" ${
-            task.status === "Done" ? "checked" : ""
-          } /></td>
-        </tr>
-      `
-        )
-        .join("")}
-    </tbody>
-  `;
-  taskTable.appendChild(table);
-
-  // checkbox event listeners
-  let checkboxes = taskTable.querySelectorAll("input[type='checkbox']");
-  checkboxes.forEach((checkbox) => {
-    checkbox.addEventListener("change", async function () {
-      let index = this.getAttribute("data-index");
-      tasks[index].status = this.checked ? "Done" : "Pending";
-
-      await fetch(`${url}/${id}.json`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ tasks: tasks }),
-      });
-
-      displayTasks(tasks); // Refresh UI
-     
-    });
-  });
-}
-
-// Add new task and save to Firebase
-document.getElementById("addTask").addEventListener("click", async () => {
-  let input = document.getElementById("InputTast").value;
-  if (!input) return alert("Please enter a task");
-
-  // Get existing project data
-  let res = await fetch(`${url}/${id}.json`);
-  let data = await res.json();
-
-  let existingTasks = data.tasks || [];
-
-  // Add new task
-  let newTask = { title: input, status: "Pending" };
-  existingTasks.push(newTask);
-
-  // update firebase
-  await fetch(`${url}/${id}.json`, {
-    method: "PATCH",
+  await fetch(`${url}/${id}/tasks.json`, {
+    method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ tasks: existingTasks }),
+    body: JSON.stringify(allTasks),
   });
 
-  displayTasks(existingTasks);
+  addTask.value = "";
+  addDes.value = "";
 
-  document.getElementById("InputTast").value = "";
+  fetchData();
 });
 
+//function for fetch and display Data
+async function fetchData() {
+  let res = await fetch(`${url}/${id}/tasks.json`);
+  let data = await res.json();
+  console.log(data);
+
+  taskData = Object.entries(data).map(([id, task]) => {
+    return { id, ...task };
+  });
+  console.log(taskData);
+
+  let tbody = document.getElementById("tbody");
+  tbody.innerHTML = "";
+
+    let completedCount = 0; //Declare outside so we can count accurately
+
+
+  taskData.forEach((ele) => {
+    let row = document.createElement("tr");
+    row.innerHTML = `
+      <td>${ele.taskNo}</td>
+      <td>${ele.task}</td>
+      <td>${ele.description}</td>
+   `;
+
+    //create td element for status
+    // Create statusCell and set from Firebase data
+    let statusCell = document.createElement("td");
+    statusCell.innerText = ele.status === "Completed" ? "Completed" : "Pending";
+
+    // Create checkbox and set checked based on status
+    let checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.checked = ele.status === "Completed";
+
+    // Update initial count if already completed
+    if (checkbox.checked) completedCount++;
+
+    //  Add checkbox event listener
+    checkbox.addEventListener("change", async () => {
+      let newStatus = checkbox.checked ? "Completed" : "Pending";
+      statusCell.innerText = newStatus;
+
+      //  Update status in Firebase
+      await fetch(`${url}/${id}/tasks/${ele.id}.json`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ status: newStatus }),
+      });
+      //  Recalculate after change
+      fetchData(); // Or call updateCheckedCount() after setting new status in taskData
+    });
+
+    ////////////////////
+    row.appendChild(statusCell);
+    let checkboxCell = document.createElement("td");
+    checkboxCell.appendChild(checkbox);
+    row.appendChild(checkboxCell);
+
+    tbody.appendChild(row);
+  });
+
+  // Update Percentage After DOM is ready
+  function updateCheckedCount() {
+    let totalCount = taskData.length;
+    let percentage = totalCount > 0 ? (completedCount / totalCount) * 100 : 0;
+    let showCount = document.getElementById("showCount");
+    showCount.innerText = `Completed Tasks: ${Math.floor(percentage)}%`;
+
+    let showPercent = document.getElementById("showPercent");
+    showPercent.style.width = `${percentage}%`
+
+  }
+
+    updateCheckedCount();
+}
+
+fetchData();
 showDetail();
 
+
 //budget
+
 //fetch material data
 let MaterialRates =
   "https://home-improvement-tracker-fb992-default-rtdb.firebaseio.com/MaterialRates";
@@ -154,8 +210,9 @@ async function fetchMaterial() {
 
 fetchMaterial();
 
+
 //set materialBudget in firebase
-let BudgetUrl = `https://home-improvement-tracker-fb992-default-rtdb.firebaseio.com/Projects/${id}/budget`;
+let BudgetUrl = `https://home-improvement-tracker-fb992-default-rtdb.firebaseio.com/Projects/${id}/Budget`;
 
 
 function displayMaterial() {
@@ -192,7 +249,7 @@ function displayMaterial() {
     });
 
    // Fetch and display updated data
-    showBudgetTable();
+    showBudgetTable(projectBudget);
 
     // Clear input fields
     materialQuantity.value = "";
@@ -200,19 +257,21 @@ function displayMaterial() {
 }
 
 // Fetch and display all budget data in a table
-async function showBudgetTable(){
+
+async function showBudgetTable(projectBudget){
      let res = await fetch(`${BudgetUrl}.json`);
     let data = await res.json();
     console.log(data)
 
-    let budget  = Object.entries(data).map(([id,budgetdata])=>{
+    let Budget  = Object.entries(data).map(([id,budgetdata])=>{
         return {id,...budgetdata}
     })
+
 
      let tbody = document.querySelector("#materialTable tbody");
       tbody.innerHTML = "";
       let list = 1;
-   budget.forEach((item) => {
+   Budget.forEach((item) => {
     let row = document.createElement("tr");
     row.innerHTML = `
       <td>${list++}</td>
@@ -224,17 +283,35 @@ async function showBudgetTable(){
     tbody.appendChild(row);
 
   });
-let totalBudget = budget.reduce((acc, item) => acc + Number(item.total), 0);
-console.log("Total Budget:", totalBudget);
 
-let finalBudget = document.getElementById("finalBudget");
-finalBudget.innerHTML="";  
-let h2 = document.createElement("h2");
-h2.innerText = `Total Budget:${totalBudget}`
-finalBudget.appendChild(h2)
-  
+
+let totalBudgetUsed = Budget.reduce((acc, item) => acc + Number(item.total), 0);
+console.log("Total Budget:", totalBudgetUsed);
+
+ budCal(projectBudget, totalBudgetUsed);
+
 }
-showBudgetTable();
+
+function budCal(budgetFromProject, budgetUsed) {
+  let finalBudget = document.getElementById("finalBudget");
+  finalBudget.innerHTML = "";
+
+let finalAmount = budgetFromProject - budgetUsed
+
+  let h2 = document.createElement("h2");
+
+  if(finalAmount >= 0){
+    h2.innerText = `Total Budget Left: ₹${finalAmount}`;
+   finalBudget.appendChild(h2);
+    finalBudget.style.backgroundColor= "#3be96c"
+  }
+  else{
+   h2.innerText = `Over Budget: ₹${finalAmount}`;
+   finalBudget.appendChild(h2);
+    finalBudget.style.backgroundColor= "red"
+  }
+}
+
 displayMaterial();
 
 //download function

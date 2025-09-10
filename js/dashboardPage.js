@@ -22,14 +22,16 @@ let submitBtn = document.getElementById("submit-btn");
 submitBtn.addEventListener("click", async () => {
   let image = document.getElementById("ref-image").value;
   let category = document.getElementById("category").value;
-  let description = document.getElementById("description").value
+  let description = document.getElementById("description").value;
+  let endDate = document.getElementById("endDate").value
+  let budget = document.getElementById("budget").value;
 
   if (image === "" || category === "") {
     alert("please fill both file");
     return;
   }
 
-let newProject = {image,category, description,dateTime : new Date().toLocaleString()};
+let newProject = {image,category, description,budget,endDate,dateTime : new Date().toLocaleString()};
 
 await fetch(`${url}.json`,{
     method : "POST",
@@ -41,6 +43,8 @@ await fetch(`${url}.json`,{
   document.getElementById("category").value = "";
   document.getElementById("form-div").style.display = "none";
   document.getElementById("description").value = "";
+  document.getElementById("endDate").value = "";
+  document.getElementById("budget").value = "";
   document.body.style.backgroundColor = "";
 
   // Show updated data
@@ -69,7 +73,10 @@ async function fetchData() {
     designCard.innerHTML = `
       <img src="${ele.image}" width="200" />
       <h3>Category - ${ele.category}</h3>
-      <p><strong>Description:</strong> ${ele.description || "No description available"}</p>       <p>Date & Time - ${ele.dateTime || "Not Available"}</p>
+      <p><strong>Description:</strong> ${ele.description || "No description available"}</p>
+      <p>Budget - ${ele.budget}</p>    
+      <p>Start Date & Time - ${ele.dateTime || "Not Available"}</p>
+      <p>End Date - ${ele.endDate}</p>
        <a href="ManageTask.html?id=${ele.id}"><button id="detailBtn">Detail</button></a>
       <button id="deleteBtn" onclick="deleteCard('${ele.id}')">Delete</button>
     `;
